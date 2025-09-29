@@ -1,1 +1,2 @@
-This module created by paul for eductional and preparation for Terraform associate 003 purpous.
+This module was created by Paul for educational purposes and to prepare for the Terraform Associate (003) exam.
+
