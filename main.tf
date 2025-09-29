@@ -2,14 +2,14 @@
 ###############This is a external load balancer with a public IP ######################
 resource "azurerm_lb" "external" {
   name                = var.name_external_lb
-  location            = var.location # à adapter
-  resource_group_name = var.rg_name  # à adapter
-  sku                 = "Standard"   # Recommandé pour Internet-facing
+  location            = var.location
+  resource_group_name = var.rg_name
+  sku                 = "Standard"
   tags                = var.tags
 
   frontend_ip_configuration {
     name                 = "PublicFrontend"
-    public_ip_address_id = var.public_ip_id # 👈 Ton IP publique existante
+    public_ip_address_id = var.public_ip_id
   }
 }
 
@@ -69,8 +69,8 @@ resource "azurerm_lb_rule" "http_rule" {
 resource "azurerm_network_interface_backend_address_pool_association" "extenal_assoc" {
   for_each = var.public_vm_nics
 
-  network_interface_id    = each.value  # 👈 Ta NIC existante
-  ip_configuration_name   = "ipconfig1" # Nom de la config IP dans ta NIC (souvent "ipconfig")
+  network_interface_id    = each.value
+  ip_configuration_name   = "ipconfig1"
   backend_address_pool_id = azurerm_lb_backend_address_pool.external_pool.id
 }
 
